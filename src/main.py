@@ -2,9 +2,6 @@ from groq import Groq
 import os
 from dotenv import load_dotenv
 import matplotlib.pyplot
-import time
-
-start = time.time()
 
 CO2E = 0
 CO2T = 0
@@ -134,4 +131,3 @@ try:
 except:
     print("AI functionality is not available right now, Please try again later")
 
-print("latency =",time.time()-start)
