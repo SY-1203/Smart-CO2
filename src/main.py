@@ -26,7 +26,7 @@ for i in T:
         "DIESEL":[0.14340,0.17174,0.21007,0.17304],"HYBRID":[0.11413,0.11724,0.15650,0.12825]}
         try:
             fuel =s.selectbox("Select the fuel used for your car: ",["CNG","LPG","PETROL","DIESEL","HYBRID"])
-            dist = s.number_input("Enter the car distance travelled (km):",min_value = 0.0 )
+            dist = s.number_input("Enter the car distance travelled (km):",min_value = 0.0, help="This can be found on the dashboard of your car, do after-before the get the distance travelled" )
             size =s.selectbox("What is your car size: ",["Small","Medium","Large","Average"])
             sizel = ["Small","Medium","Large","Average"]
             sizenum = sizel.index(size)
@@ -41,7 +41,7 @@ for i in T:
         s.subheader("Bike Details")
         emission = {"Small":  0.08319,"Medium":  0.10107,"Large":  0.13252,"Average":  0.11367}
         try:
-            dist = s.number_input("Enter the bike distance travelled (km):",min_value = 0.0 )
+            dist = s.number_input("Enter the bike distance travelled (km):",min_value = 0.0,help="This can be found on the dashboard of your car, do after-before the get the distance travelled")
             size =s.selectbox("What is your bike size: ",["Small","Medium","Large","Average"])
             bike = dist * emission[size]
             CO2E +=  bike
@@ -53,7 +53,7 @@ for i in T:
     if i.upper() == "BUS":
         s.subheader("Bus Details")
         try:
-            dist = s.number_input("Enter the bus distance travelled (km):",min_value = 0.0 )
+            dist = s.number_input("Enter the bus distance travelled (km):",min_value = 0.0, help="Check the distance on maps between initial and final destinations" )
             bus = dist * 0.10385
             CO2E += bus
             CO2T += bus
@@ -64,7 +64,7 @@ for i in T:
 
 try:
     s.subheader("Electricity  Details")
-    elec = s.number_input("Enter the electricity usage (kWh):",min_value = 0.0 )
+    elec = s.number_input("Enter the electricity usage (kWh):",min_value = 0.0,help="Check on electricity bill and calculate weekly consumption" )
     if elec > 0.0:
         elect = elec * 0.17700
         CO2E += elect
@@ -74,7 +74,7 @@ except:
         
 try:
     s.subheader("Water Details")
-    wat1 = s.number_input("Enter the water usage (m³):",min_value = 0.0 )
+    wat1 = s.number_input("Enter the water usage (m³):",min_value = 0.0,help="Check on water bill and calculate weekly consumption" )
     wat2 = s.number_input(" Enter a rough estimate of water disposed (m³):", min_value = 0.0)
     if wat1>0 and wat2>0:
         wat1 = float(wat1)
@@ -142,12 +142,29 @@ if s.button("Get AI Explanation and Alternatives"):
     
     try:
         with s.spinner("Getting Response from AI... "):
-            client = Groq(api_key=api_key)
+            if CO2 > 0:
+                client = Groq(api_key=api_key)
+                question = '''My carbon footprint is 
+                {} kg of CO₂ for 1 week :- 
+                Transport - {} 
+                Electricity - {} 
+                Water - {}
+                
+                can you: 
+                1. explain what it means
+                2. provide me with alternate practices to reduce it, I want 5 realistic alternatives to reduce it 
+                3. prioritize the biggest contributor 
 
-            chat = client.chat.completions.create(model="llama-3.1-8b-instant", 
-            messages=[{"role": "user", "content": "My carbon footprint is {} kg of CO2 for 1 week - Transport - {}; Electricity - {}, Water - {}, can you explain what it means, also provide me with alternate practices to reduce it, I want 6 realistic alternatives to reduce it with priority for the biggest contributor and Give qualitative impact only: High/Medium/Low".format(CO2E,CO2T,CO2EL,CO2W) }])
-            s.subheader("AI Response")
-            s.write(chat.choices[0].message.content)
+                NOTE: Give qualitative impact only: High/Medium/Low
+                Additionally display the output in Format:
+                **Explanation**
+                **How it impacts the environment
+                **Alternatives**'''.format(CO2E,CO2T,CO2EL,CO2W)
+                chat = client.chat.completions.create(model="llama-3.1-8b-instant",  messages=[{"role": "user", "content": question}])
+                s.subheader("AI Response")
+                s.write(chat.choices[0].message.content)
+            else:
+                s.warning("No data entered")
 
     except:
         s.error("AI functionality is not available right now, Please try again later")
