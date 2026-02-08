@@ -140,7 +140,7 @@ if s.button("Get AI Explanation and Alternatives"):
         s.error("API Key is missing")
     
     try:
-        if CO2 > 0:
+        if CO2E > 0:
             with s.spinner("Getting Response from AI... "):
                 client = Groq(api_key=api_key)
                 question = '''My carbon footprint is 
