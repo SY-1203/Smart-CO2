@@ -96,43 +96,42 @@ except:
     s.warning("An errror occured, Please check the data entered")
 
 if s.button("Show Carbon Footprint"):
-    with s.spinner("Displaying Carbon Footprint... "):
-        s.write("Your carbon footprint is", CO2E,"kg of CO₂")
-        act = list(TD.keys())
-        co2_1 = list(TD.values())
-        if CO2EL != 0:
-            act.append("Electricity")
-            co2_1.append(CO2EL)
-        if CO2W != 0:
-            act.append("Water")
-            co2_1.append(CO2W)
-        if len(co2_1)>0:
-            fig, x = m.subplots()
+    if CO2E > 0:
+        with s.spinner("Displaying Carbon Footprint... "):
+            s.write("Your carbon footprint is", CO2E,"kg of CO₂")
+            act = list(TD.keys())
+            co2_1 = list(TD.values())
+            if CO2EL != 0:
+                act.append("Electricity")
+                co2_1.append(CO2EL)
+            if CO2W != 0:
+                act.append("Water")
+                co2_1.append(CO2W)
 
-            x.bar(act,co2_1)
-            x.set_xlabel("Daily Practices")
-            x.set_ylabel("CO₂ Footprint")
-            s.pyplot(fig)
-        else:
-            s.write("No data to display in bar graph")
+                fig, x = m.subplots()
 
-        cat = []
-        co2_2 = []
-        if CO2T != 0:
-            cat.append("Transport")
-            co2_2.append(CO2T)
-        if CO2EL != 0:
-            cat.append("Electricity")
-            co2_2.append(CO2EL)
-        if CO2W != 0:
-            cat.append("Water")
-            co2_2.append(CO2W)
-        if len(co2_2)>0:
+                x.bar(act,co2_1)
+                x.set_xlabel("Daily Practices")
+                x.set_ylabel("CO₂ Footprint")
+                s.pyplot(fig)
+    
+
+            cat = []
+            co2_2 = []
+            if CO2T != 0:
+                cat.append("Transport")
+                co2_2.append(CO2T)
+            if CO2EL != 0:
+                cat.append("Electricity")
+                co2_2.append(CO2EL)
+            if CO2W != 0:
+                cat.append("Water")
+                co2_2.append(CO2W)
             fig, x = m.subplots()
             x.pie(co2_2, labels = cat, autopct='%0.2f%%',startangle=90 )
             s.pyplot(fig)
-        else:
-            s.write("No data to display in pie chart")
+    else:
+        s.warning("No data to display")
 
 if s.button("Get AI Explanation and Alternatives"):
     try:
@@ -141,8 +140,8 @@ if s.button("Get AI Explanation and Alternatives"):
         s.error("API Key is missing")
     
     try:
-        with s.spinner("Getting Response from AI... "):
-            if CO2 > 0:
+        if CO2 > 0:
+            with s.spinner("Getting Response from AI... "):
                 client = Groq(api_key=api_key)
                 question = '''My carbon footprint is 
                 {} kg of CO₂ for 1 week :- 
@@ -163,8 +162,8 @@ if s.button("Get AI Explanation and Alternatives"):
                 chat = client.chat.completions.create(model="llama-3.1-8b-instant",  messages=[{"role": "user", "content": question}])
                 s.subheader("AI Response")
                 s.write(chat.choices[0].message.content)
-            else:
-                s.warning("No data entered")
+        else:
+            s.warning("No data entered")
 
     except:
         s.error("AI functionality is not available right now, Please try again later")
