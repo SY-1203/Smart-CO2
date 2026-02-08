@@ -1,0 +1,120 @@
+
+**TEST CASE 1**
+(venv) PS C:\Users\Saima\Smart CO2> & "C:/Users/Saima/Smart CO2/venv/Scripts/python.exe" "c:/Users/Saima/Smart CO2/src/main.py"
+Enter the different vehicles used for transport car
+NOTE: Please enter weekly estimates
+Enter the fuel used petrol
+Enter the distance travelled in km 100
+Select car size :-
+1. Small
+2. Medium
+3. Large
+4. Average
+Enter 1/2/3/4 4
+Enter the electricity usage in kWh 50
+Enter your water usage in m^3  10
+Enter a rough estimate of water disposed in m^3 8
+Your carbon footprint is 28.40204 kg of CO2
+Your carbon footprint is a measure of the amount of greenhouse gas emissions, specifically CO2, that you are responsible for over a given period of time. In your case, it's 28.40204 kg of CO2 for one week.
+
+Breaking down the data you provided:
+
+1. **Transport**: 16.272 kg of CO2 (about 57% of your weekly carbon footprint). This suggests that your transportation habits have a significant impact on your carbon footprint.
+   - Possible explanations:
+     - Frequent use of fossil fuel-based vehicles (such as cars, trucks, airplanes, or buses)
+     - Long distances traveled
+     - Inefficient use of transportation modes (e.g., driving alone, short trips in personal vehicles)
+   - Suggestions:
+     - Reduce use of personal vehicles
+     - Opt for public transportation, walking, or cycling for shorter distances
+     - Consider alternative modes of transportation, such as electric or hybrid vehicles
+     - Plan routes to reduce fuel consumption and emissions
+
+2. **Electricity**: 8.85 kg of CO2 (about 31% of your weekly carbon footprint). This component accounts for the carbon emissions associated with the electricity used in your home over the past week.
+   - Considerations:
+     - Efficiency of appliances and lighting
+     - Type of energy source used for electricity generation (coal, natural gas, nuclear, renewable)
+     - Energy usage patterns in your home
+   - Suggestions:
+     - Use energy-efficient appliances and lighting
+     - Turn off lights, electronics, and other appliances when not in use
+     - Consider investing in renewable energy sources or purchasing carbon offsets for the electricity used in your home
+
+3. **Water**: 3.28 kg of CO2 (about 12% of your weekly carbon footprint). This component accounts for the emissions associated with water treatment, supply, and distribution.
+   - Considerations:
+     - Water usage patterns
+     - Type of water treatment systems used
+     - Water efficiency measures in place
+   - Suggestions:
+     - Fix leaks and take measures to reduce water waste
+     - Install water-efficient appliances and fixtures
+     - Consider rainwater harvesting or graywater reuse systems
+
+To reduce your carbon footprint, focus on the most significant contributors: transportation and electricity usage. Implementing strategies to reduce these components will have the most substantial impact on minimizing your environmental footprint.
+
+Please note that this is a general interpretation of your carbon footprint data. For a more accurate understanding and personalized recommendations, consult with a carbon footprint analysis expert or a qualified sustainability professional.
+Based on your provided carbon footprint, the biggest contributor is Transport with 57.5% (16.272000000000002 / 28.40204). Here are 6 realistic alternative practices to reduce your carbon footprint, prioritizing the biggest contributor:
+
+1. **Switch to public transport or carpooling** - High: Using public transport or carpooling can significantly reduce your carbon footprint from transport.    
+2. **Use a bike or walk for shorter trips** - Medium: Cycling or walking for shorter trips can also help reduce your carbon footprint, but may not be practical for longer commutes.
+3. **Use more energy-efficient transportation options** - Medium: Looking into more energy-efficient transportation options like electric or hybrid vehicles can help reduce your carbon footprint.
+4. **Reduce driving frequency and distances** - Medium: Reducing the frequency and distances of your car trips can also help lower your carbon footprint.      
+5. **Increase the use of renewable energy sources** - Medium: Increasing the use of renewable energy sources for your electricity can help reduce your carbon footprint from electricity generation.
+6. **Improve energy efficiency at home through appliances** - Low: While electricity is the second biggest contributor, it's still a smaller portion of your total footprint. Improving energy efficiency through appliances like LED bulbs or using power strips can have a minor impact.
+
+Note that the impact of these alternative practices may vary based on individual circumstances and the specific actions taken.
+latency = 21.156970977783203
+
+**OTHER TEST CASES ONLY NUMERIC DATA**
+Enter the electricity usage in kWh 20
+Enter your water usage in m^3  5
+Enter a rough estimate of water disposed in m^3 4
+Your carbon footprint is 5.18002 kg of CO2
+
+Enter the different vehicles used for transport bus
+NOTE: Please enter weekly estimates
+Enter the distance travelled in km 40
+Enter the electricity usage in kWh 25
+Enter your water usage in m^3  6
+Enter a rough estimate of water disposed in m^3 5
+Your carbon footprint is 10.5812 kg of CO2
+
+Enter the different vehicles used for transport Car Bus
+NOTE: Please enter weekly estimates
+Enter the fuel used diesel
+Enter the distance travelled in km for car 50
+Select car size :-
+1. Small
+2. Medium
+3. Large
+4. Average
+Enter 1/2/3/4 4
+Enter the distance travelled in km for bus 29
+Enter the electricity usage in kWh 45
+Enter your water usage in m^3  8
+Enter a rough estimate of water disposed in m^3 4
+Your carbon footprint is 21.842570000000002 kg of CO2
+
+Enter the different vehicles used for transport CAR
+NOTE: Please enter weekly estimates
+Enter the fuel used CNG
+Enter the distance travelled in km for car 80
+Select car size :-
+1. Small
+2. Medium
+3. Large
+4. Average
+Enter 1/2/3/4 2
+Enter the electricity usage in kWh 
+Enter your water usage in m^3  20
+Enter a rough estimate of water disposed in m^3 16
+Your carbon footprint is 18.96328 kg of CO2
+
+Enter the different vehicles used for transport MOTORBIKE
+NOTE: Please enter weekly estimates
+Enter the distance travelled in km for motorbike 40
+Select motorbiker size - Small, Medium, Large, Average SMALL
+Enter the electricity usage in kWh 30
+Enter your water usage in m^3  
+Enter a rough estimate of water disposed in m^3 
+Your carbon footprint is 8.637599999999999 kg of CO2
