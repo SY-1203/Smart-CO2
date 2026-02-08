@@ -1,5 +1,4 @@
 from groq import Groq
-import os
 import matplotlib.pyplot as m
 import streamlit as s
 
