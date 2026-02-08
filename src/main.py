@@ -3,7 +3,7 @@ import os
 import matplotlib.pyplot as m
 import streamlit as s
 
-s.title("SmartCO2 - Carbon Footprint Calculator")
+s.title("SmartCO₂ - Carbon Footprint Calculator")
 
 if s.button("Reset"):
     s.session_state.clear()
@@ -74,8 +74,8 @@ except:
         
 try:
     s.subheader("Water Details")
-    wat1 = s.number_input("Enter the water usage (m^3):",min_value = 0.0 )
-    wat2 = s.number_input(" Enter a rough estimate of water disposed (m^3):", min_value = 0.0)
+    wat1 = s.number_input("Enter the water usage (m³):",min_value = 0.0 )
+    wat2 = s.number_input(" Enter a rough estimate of water disposed (m³):", min_value = 0.0)
     if wat1>0 and wat2>0:
         wat1 = float(wat1)
         wat2 = float(wat2)
@@ -96,42 +96,43 @@ except:
     s.warning("An errror occured, Please check the data entered")
 
 if s.button("Show Carbon Footprint"):
-    s.write("Your carbon footprint is", CO2E,"kg of CO2")
-    act = list(TD.keys())
-    co2_1 = list(TD.values())
-    if CO2EL != 0:
-        act.append("Electricity")
-        co2_1.append(CO2EL)
-    if CO2W != 0:
-        act.append("Water")
-        co2_1.append(CO2W)
-    if len(co2_1)>0:
-        fig, x = m.subplots()
+    with s.spinner("Displaying Carbon Footprint... "):
+        s.write("Your carbon footprint is", CO2E,"kg of CO₂")
+        act = list(TD.keys())
+        co2_1 = list(TD.values())
+        if CO2EL != 0:
+            act.append("Electricity")
+            co2_1.append(CO2EL)
+        if CO2W != 0:
+            act.append("Water")
+            co2_1.append(CO2W)
+        if len(co2_1)>0:
+            fig, x = m.subplots()
 
-        x.bar(act,co2_1)
-        x.set_xlabel("Daily Practices")
-        x.set_ylabel("CO2 Footprint")
-        s.pyplot(fig)
-    else:
-        s.write("No data to display in bar graph")
+            x.bar(act,co2_1)
+            x.set_xlabel("Daily Practices")
+            x.set_ylabel("CO₂ Footprint")
+            s.pyplot(fig)
+        else:
+            s.write("No data to display in bar graph")
 
-    cat = []
-    co2_2 = []
-    if CO2T != 0:
-        cat.append("Transport")
-        co2_2.append(CO2T)
-    if CO2EL != 0:
-        cat.append("Electricity")
-        co2_2.append(CO2EL)
-    if CO2W != 0:
-        cat.append("Water")
-        co2_2.append(CO2W)
-    if len(co2_2)>0:
-        fig, x = m.subplots()
-        x.pie(co2_2, labels = cat, autopct='%0.2f%%',startangle=90 )
-        s.pyplot(fig)
-    else:
-        s.write("No data to display in pie chart")
+        cat = []
+        co2_2 = []
+        if CO2T != 0:
+            cat.append("Transport")
+            co2_2.append(CO2T)
+        if CO2EL != 0:
+            cat.append("Electricity")
+            co2_2.append(CO2EL)
+        if CO2W != 0:
+            cat.append("Water")
+            co2_2.append(CO2W)
+        if len(co2_2)>0:
+            fig, x = m.subplots()
+            x.pie(co2_2, labels = cat, autopct='%0.2f%%',startangle=90 )
+            s.pyplot(fig)
+        else:
+            s.write("No data to display in pie chart")
 
 if s.button("Get AI Explanation and Alternatives"):
     try:
@@ -140,12 +141,13 @@ if s.button("Get AI Explanation and Alternatives"):
         s.error("API Key is missing")
     
     try:
-        client = Groq(api_key=api_key)
+        with s.spinner("Getting Response from AI... "):
+            client = Groq(api_key=api_key)
 
-        chat = client.chat.completions.create(model="llama-3.1-8b-instant", 
-        messages=[{"role": "user", "content": "My carbon footprint is {} kg of CO2 for 1 week - Transport - {}; Electricity - {}, Water - {}, can you explain what it means, also provide me with alternate practices to reduce it, I want 6 realistic alternatives to reduce it with priority for the biggest contributor and Give qualitative impact only: High/Medium/Low".format(CO2E,CO2T,CO2EL,CO2W) }])
-        s.subheader("AI Response")
-        s.write(chat.choices[0].message.content)
+            chat = client.chat.completions.create(model="llama-3.1-8b-instant", 
+            messages=[{"role": "user", "content": "My carbon footprint is {} kg of CO2 for 1 week - Transport - {}; Electricity - {}, Water - {}, can you explain what it means, also provide me with alternate practices to reduce it, I want 6 realistic alternatives to reduce it with priority for the biggest contributor and Give qualitative impact only: High/Medium/Low".format(CO2E,CO2T,CO2EL,CO2W) }])
+            s.subheader("AI Response")
+            s.write(chat.choices[0].message.content)
 
     except:
         s.error("AI functionality is not available right now, Please try again later")
